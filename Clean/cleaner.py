@@ -1,5 +1,4 @@
 from cmath import log
-import imp
 import os
 import logging
 import random
@@ -98,7 +97,7 @@ class Corupter:
 if __name__ == "__main__":
     logging.info("Started")
     choose = input("Do you want to restore or corrupt files? (r/c) ")
-    path = r"C:\Users\stefa\OneDrive\Dokumente\GitHub\PP-Cleaner\Clean"
+    path = r"C:\Users\Stefan\Documents\GitHub\PP-Cleaner\Clean"
     if choose == "r":
         clean = Cleaner(path)
         clean.run()
