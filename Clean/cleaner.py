@@ -40,15 +40,15 @@ class Cleaner:
 
     def change_extension(self):                                 # Change file extension
         if self.extension == ".png":
-            logging.info(f"{self.file} changed to a .png file")
+            logging.info(f"{self.file} restored to a .png file")
             base = os.path.splitext(self.file)[0]
             os.rename(self.file, base + ".png")
         elif self.extension == ".gif":
-            logging.info(f"{self.file} changed to a .gif file")
+            logging.info(f"{self.file} restored to a .gif file")
             base = os.path.splitext(self.file)[0]
             os.rename(self.file, base + ".gif")
         elif self.extension == ".jpg":
-            logging.info(f"{self.file} changed to a .jpg file")
+            logging.info(f"{self.file} restored to a .jpg file")
             base = os.path.splitext(self.file)[0]
             os.rename(self.file, base + ".jpg")
     
