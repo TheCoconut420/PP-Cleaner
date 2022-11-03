@@ -19,11 +19,14 @@ class DukeBallDrawer:
 
     def load(self, filepath: str):
         with open(filepath, "rb") as file:
+            self.__pixel = file.read()
+            file.close()
+
+        with open(filepath, "rb") as file:
             self.__magic_number = self.__read_int_from_file(file, 2)
             self.__size = self.__read_int_from_file(file, 4)
             self.__reserve = self.__read_int_from_file(file, 4)
             self.__offset = self.__read_int_from_file(file, 4)
-            self.__header_size = self.__read_int_from_file(file, 4)
             self.__width = self.__read_int_from_file(file, 4)
             self.__height = self.__read_int_from_file(file, 4)
             self.__planes = self.__read_int_from_file(file, 2)
@@ -32,14 +35,15 @@ class DukeBallDrawer:
             self.__size_image = self.__read_int_from_file(file, 4)
             self.__x_pixels_per_meter = self.__read_int_from_file(file, 4)
             self.__y_pixels_per_meter = self.__read_int_from_file(file, 4)
+            self.__ppm = self.__read_int_from_file(file, 4)
             self.__color = self.__read_int_from_file(file, 4)
             self.__color_important = self.__read_int_from_file(file, 4)
-            self.__pixel = file.read()
-            
-            self.check()
-               
+            file.close()
+
+                           
     def check(self):
         if self.__magic_number != 19778:
+            print(self.__magic_number)
             raise Exception("Not a BMP file")
 
     def __read_int_from_file(self, file, number_of_bytes: int):
@@ -50,23 +54,11 @@ class DukeBallDrawer:
         with open(filepath, "wb") as file:
             file.write(self.__pixel)
             file.flush()
-
+            file.close()    
+    
     def __str__(self) -> str:
-        return  f"Magic number: {self.__magic_number}  \n" \
-                f"Size: {self.__size}  \n" \
-                f"Reserve: {self.__reserve}  \n" \
-                f"Offset: {self.__offset}  \n" \
-                f"Header size: {self.__header_size}  \n" \
-                f"Width: {self.__width}  \n" \
-                f"Height: {self.__height}  \n" \
-                f"Planes: {self.__planes}  \n" \
-                f"Bit count: {self.__bit_count}  \n" \
-                f"Compression: {self.__compression}  \n" \
-                f"Size image: {self.__size_image}  \n" \
-                f"X pixels per meter: {self.__x_pixels_per_meter}  \n" \
-                f"Y pixels per meter: {self.__y_pixels_per_meter}  \n" \
-                f"Color: {self.__color}  \n" \
-                f"Color important: {self.__color_important}  \n" \
+        return f"Magic Number: {self.__magic_number}, Size: {self.__size} Reserve: {self.__reserve} Offset: {self.__offset} Width: {self.__width} Height: {self.__height} Planes: {self.__planes} Bit Count: {self.__bit_count} Compression: {self.__compression} Size Image: {self.__size_image} X Pixels Per Meter: {self.__x_pixels_per_meter} Y Pixels Per Meter: {self.__y_pixels_per_meter} PPM: {self.__ppm} Color: {self.__color} Color Important: {self.__color_important}"
+    
             
 drawer = DukeBallDrawer()
 drawer.load("szut.bmp")
